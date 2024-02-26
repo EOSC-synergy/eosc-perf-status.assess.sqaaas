@@ -1,0 +1,42 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/eosc-perf-status:
+      branch: master
+      repo: https://github.com/EOSC-synergy/eosc-perf-status
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/2.0.0
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/EOSC-synergy/eosc-perf-status git:
+        commands:
+        - /usr/bin/env sh .sqa/script.crappy-ecru-flounder.sh
+        container: qc.acc_frumpy-cyan-shark
+  QC.Doc:
+    repos:
+      github.com/EOSC-synergy/eosc-perf-status find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.seedy-brown-wolfhound.sh
+        container: qc.doc_smelly-scarlet-frigatebird
+      github.com/EOSC-synergy/eosc-perf-status git:
+        commands:
+        - /usr/bin/env sh .sqa/script.nerdy-vermilion-bloodhound.sh
+        container: qc.doc_cozy-cinnabar-akita
+  QC.Lic:
+    repos:
+      github.com/EOSC-synergy/eosc-perf-status licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.baggy-apricot-oyster.sh
+        container: qc.lic_muzzy-corn-butterfly
+  QC.Ver:
+    repos:
+      github.com/EOSC-synergy/eosc-perf-status get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.stuffy-indigo-tang.sh
+        container: qc.ver_crabby-dandelion-monkey
+timeout: 5400
